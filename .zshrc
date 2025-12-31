@@ -113,10 +113,32 @@ PS1='%B%F{blue}%f%b  %B%F{magenta}%n%f%b $(dir_icon)  %B%F{red}%~%f%b${vcs_in
 #  ┌─┐┬  ┬ ┬┌─┐┬┌┐┌┌─┐
 #  ├─┘│  │ ││ ┬││││└─┐
 #  ┴  ┴─┘└─┘└─┘┴┘└┘└─┘
-source /usr/share/zsh/plugins/fzf-tab-git/fzf-tab.zsh
-source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
+#source /usr/share/zsh/plugins/fzf-tab-git/fzf-tab.zsh
+#source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+#source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+#source /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
+
+# Plugin loader helper
+source_if_exists() {
+  [[ -f "$1" ]] && source "$1"
+}
+
+# fzf-tab
+source_if_exists /usr/share/zsh/plugins/fzf-tab-git/fzf-tab.plugin.zsh
+source_if_exists /usr/share/zsh-fzf-tab/fzf-tab.plugin.zsh
+
+# autosuggestions
+source_if_exists /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+source_if_exists /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+# syntax highlighting (HARUS PALING BAWAH)
+source_if_exists /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source_if_exists /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# history substring search
+source_if_exists /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
+source_if_exists /usr/share/zsh-history-substring-search/zsh-history-substring-search.zsh
+
 
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
@@ -164,7 +186,6 @@ alias cd='z'
 #  ┌─┐┬ ┬┌┬┐┌─┐  ┌─┐┌┬┐┌─┐┬─┐┌┬┐
 #  ├─┤│ │ │ │ │  └─┐ │ ├─┤├┬┘ │
 #  ┴ ┴└─┘ ┴ └─┘  └─┘ ┴ ┴ ┴┴└─ ┴
-$HOME/.local/bin/colorscript -r
 #disable-fzf-tab
 #
 eval "$(zoxide init zsh)"
